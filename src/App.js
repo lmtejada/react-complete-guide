@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
-//import React, { useState } from 'react';
+// import Radium, { StyleRoot } from 'radium';
+// import React, { useState } from 'react';
 
 class App extends Component {
   state = {
@@ -53,11 +54,16 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      // cursor: 'pointer',
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
     }
 
     let persons = null;
@@ -77,46 +83,64 @@ class App extends Component {
           })}
         </div>
       );
+      style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
+    }
+
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Hey there</h1>
-        {/* <button 
-          style={style}
-          onClick={this.switchNameHandler.bind(this, 'Maximilian')}>
-          Switch Name
-        </button> */}
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
-        {persons}
-        {/* { 
-          this.state.showPersons ? 
-            <div>
-              <Person 
-                name={this.state.persons[0].name} 
-                age={this.state.persons[0].age} 
-                changed={this.nameChangedHandler} />
-                // Using arrow functions in click handler could be inneficient! //
-              <Person 
-                name={this.state.persons[1].name} 
-                age={this.state.persons[1].age}
-                click={() => this.switchNameHandler('Max!')} />
-              <Person 
-                name={this.state.persons[2].name}
-                age={this.state.persons[2].age}>
-                Mi hobbies are: Coding
-              </Person>
-            </div> : null
-        } */}
-      </div>
+      // <StyleRoot>
+        <div className="App">
+          <h1>Hey there</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          {/* <button 
+            style={style}
+            onClick={this.switchNameHandler.bind(this, 'Maximilian')}>
+            Switch Name
+          </button> */}
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>
+            Toggle Persons
+          </button>
+          {persons}
+          {/* { 
+            this.state.showPersons ? 
+              <div>
+                <Person 
+                  name={this.state.persons[0].name} 
+                  age={this.state.persons[0].age} 
+                  changed={this.nameChangedHandler} />
+                  // Using arrow functions in click handler could be inneficient! //
+                <Person 
+                  name={this.state.persons[1].name} 
+                  age={this.state.persons[1].age}
+                  click={() => this.switchNameHandler('Max!')} />
+                <Person 
+                  name={this.state.persons[2].name}
+                  age={this.state.persons[2].age}>
+                  Mi hobbies are: Coding
+                </Person>
+              </div> : null
+          } */}
+        </div>
+      // </StyleRoot>
     );
   }
 }
 
+// export default Radium(App);
 export default App;
 
 // const app = props => {
